@@ -18,14 +18,25 @@ public class ParseIntegers {
     public static void main(String[] args) {
         Iterator<String> words = WORDS.iterator();
         int sum = 0;
-        String justWords = "";
+        StringBuilder justWords = new StringBuilder();
+        String regexDigits = "-?(0|[1-9]\\d*)";
         while (words.hasNext()) {
             String next = words.next();
-            int number = Integer.parseInt(next);
+            if (next.matches(regexDigits)) {
+                try {
+                    int number = Integer.parseInt(next);
+                    sum += number;
+                } catch (NumberFormatException e) {
+                    System.out.println(e.getMessage());
+                }
+
+            } else {
+                justWords.append(next + " ");
+            }
             // todo: complete it
         }
         System.out.println("Sum is " + sum);
-        System.out.println("Just words:" + justWords);
+        System.out.println("Just words: " + justWords);
     }
 }
 
